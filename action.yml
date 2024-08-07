@@ -1,6 +1,9 @@
 name: 'Install premake5'
 description: 'Install premake5'
 author: 'Jarod42'
+branding:
+  icon: 'package'
+  color: 'green'
 inputs:
   repository:
     description: 'Alternative premake fork repository to use'
