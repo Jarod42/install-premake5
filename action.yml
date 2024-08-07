@@ -1,0 +1,63 @@
+name: 'Install premake5'
+description: 'Install premake5'
+author: 'Jarod42'
+inputs:
+  repository:
+    description: 'Alternative premake fork repository to use'
+    required: false
+    default: 'premake/premake-core'
+  ref:
+    description: 'The branch, tag or SHA to use'
+    required: false
+    default: 'v5.0.0-beta2'
+  msdev:
+    description: 'one of vs2019 or vs2022'
+    required: false
+    default: 'vs2022'
+  path:
+    description: 'Temporary directory where to checkout and build premake'
+    required: false
+    default: '.premake-build'
+runs:
+  using: "composite"
+  steps:
+
+    - name: checkout premake5
+      uses: actions/checkout@v4
+      with:
+          repository: ${{ inputs.repository }}
+          ref: ${{ inputs.ref }}
+          path: ${{ inputs.path }}
+
+    - name: Build premake5
+      if: runner.os == 'Linux'
+      run: |
+        cd ${{ inputs.path }}
+        make -f Bootstrap.mak linux CONFIG=release
+        sudo cp bin/release/premake5 /usr/bin/
+        cd ..
+        rm -Rf ${{ inputs.path }}
+      shell: bash
+
+    - name: Build premake5
+      if: runner.os == 'macOS'
+      run: |
+        cd ${{ inputs.path }}
+        make -f Bootstrap.mak osx CONFIG=release
+        mkdir /Applications/premake5.app
+        cp bin/release/premake5 /Applications/premake5.app/
+        cd ..
+        rm -Rf ${{ inputs.path }}
+        echo PATH=$PATH:/Applications/premake5.app/ >> $GITHUB_ENV
+        echo /Applications/premake5.app/ >> GITHUB_PATH
+      shell: bash
+
+    - name: Build premake5
+      if: runner.os == 'Windows' # 2019 or 2022
+      run: |
+        mkdir "C:\Program Files\premake"
+        $vcvarall_path = vswhere -find VC\Auxiliary\Build\vcvarsall.bat
+        cmd.exe /c "call ""$vcvarall_path"" x86_amd64 && cd ${{ inputs.path }} && nmake -f Bootstrap.mak MSDEV=${{ inputs.msdev }} windows-msbuild PLATFORM=Win32 CONFIG=release && cp bin/release/premake5.exe ""c:/Program Files/premake"""
+        Remove-Item ${{ inputs.path }} -Recurse -Force
+        echo "C:\Program Files\premake" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+      shell: powershell
