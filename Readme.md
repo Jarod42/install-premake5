@@ -14,7 +14,7 @@ Install [premake5](https://premake.github.io/) for your workflow.
     repository:
 
     # The branch, tag or SHA to use
-    # Optional. Default to 'v5.0.0-beta2'
+    # Optional. Default to 'v5.0.0-beta3'
     ref:
 
     # Alternative temporary path where to checkout and build premake
@@ -35,7 +35,7 @@ runs-on: windows-latest
 
 steps:
 - name: Installing premake5
-  uses: Jarod42/install-premake5@v1
+  uses: Jarod42/install-premake5@v2
 
 - name: Checkout
   uses: actions/checkout@v4
@@ -58,7 +58,7 @@ runs-on: ubuntu-latest
 
 steps:
 - name: Installing premake5
-  uses: Jarod42/install-premake5@v1
+  uses: Jarod42/install-premake5@v2
 
 - name: Checkout
   uses: actions/checkout@v4
@@ -78,7 +78,7 @@ runs-on: macos-latest
 
 steps:
 - name: Installing premake5
-  uses: Jarod42/install-premake5@v1
+  uses: Jarod42/install-premake5@v2
 
 - name: Checkout
   uses: actions/checkout@v4
@@ -98,7 +98,7 @@ runs-on: windows-2019
 
 steps:
 - name: Installing premake5
-  uses: Jarod42/install-premake5@v1
+  uses: Jarod42/install-premake5@v2
   with:
     msdev: 'vs2019'
     
@@ -122,7 +122,7 @@ steps:
 ```yaml
 steps:
 - name: Installing premake5
-  uses: Jarod42/install-premake5@v1
+  uses: Jarod42/install-premake5@v2
   with:
     ref: 'master'
 ```
