@@ -12,7 +12,7 @@ inputs:
   ref:
     description: 'The branch, tag or SHA to use'
     required: false
-    default: 'v5.0.0-beta3'
+    default: 'v5.0.0-beta4'
   msdev:
     description: 'one of vs2019 or vs2022'
     required: false
