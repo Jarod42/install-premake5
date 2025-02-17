@@ -7,14 +7,14 @@ Install [premake5](https://premake.github.io/) for your workflow.
 ### Inputs
 
 ```yaml
-- uses: Jarod42/install-premake5@v3
+- uses: Jarod42/install-premake5@v4
   with:
     # Alternative premake fork repository to use
     # Optional. Default to 'premake/premake-core'
     repository:
 
     # The branch, tag or SHA to use
-    # Optional. Default to 'v5.0.0-beta4'
+    # Optional. Default to 'v5.0.0-beta5'
     ref:
 
     # Alternative temporary path where to checkout and build premake
@@ -35,7 +35,7 @@ runs-on: windows-latest
 
 steps:
 - name: Installing premake5
-  uses: Jarod42/install-premake5@v3
+  uses: Jarod42/install-premake5@v4
 
 - name: Checkout
   uses: actions/checkout@v4
@@ -58,17 +58,17 @@ runs-on: ubuntu-latest
 
 steps:
 - name: Installing premake5
-  uses: Jarod42/install-premake5@v3
+  uses: Jarod42/install-premake5@v4
 
 - name: Checkout
   uses: actions/checkout@v4
 
 - name: run premake5
-  run: premake5 gmake2 --to=solution/gmake2
+  run: premake5 gmake --to=solution/gmake
 
 - name: build
   run: |
-    cd solution/gmake2
+    cd solution/gmake
     make
 ```
 
@@ -78,7 +78,7 @@ runs-on: macos-latest
 
 steps:
 - name: Installing premake5
-  uses: Jarod42/install-premake5@v3
+  uses: Jarod42/install-premake5@v4
 
 - name: Checkout
   uses: actions/checkout@v4
@@ -98,7 +98,7 @@ runs-on: windows-2019
 
 steps:
 - name: Installing premake5
-  uses: Jarod42/install-premake5@v3
+  uses: Jarod42/install-premake5@v4
   with:
     msdev: 'vs2019'
     
@@ -122,7 +122,7 @@ steps:
 ```yaml
 steps:
 - name: Installing premake5
-  uses: Jarod42/install-premake5@v3
+  uses: Jarod42/install-premake5@v4
   with:
     ref: 'master'
 ```
