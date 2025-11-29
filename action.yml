@@ -53,7 +53,7 @@ runs:
       if: runner.os == 'macOS'
       run: |
         cd ${{ inputs.path }}
-        make -f Bootstrap.mak osx CONFIG=release
+        CONFIG=release ./Bootstrap.sh
         mkdir /Applications/premake5.app
         cp bin/release/premake5 /Applications/premake5.app/
         cd ..
